@@ -1,5 +1,9 @@
 #!/usr/bin/env node
-const { Command } = require ('commander');
+
+import { Command } from 'commander';
+import { genDiff } from '../src/filediff.js';
+import { convert } from '../src/convertToAbsolutePath.js';
+
 const gendiffHelp = new Command();
 
 gendiffHelp
@@ -8,6 +12,9 @@ gendiffHelp
   .argument('<filepath2>')
   .option('-V, --version', 'output the version number')
   .helpOption('-h, --help', 'output usage information')
-  .option('-f, --format [type]', 'output format');
+  .option('-f, --format [type]', 'output format')
+  .action((filepath1, filepath2) => {
+    console.log(genDiff(convert(filepath1), convert(filepath2)))
+  })
 
 gendiffHelp.parse();
