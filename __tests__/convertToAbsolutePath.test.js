@@ -1,7 +1,7 @@
-import convert from '../src/convertToAbsolutePath.js';
 import { fileURLToPath } from 'url';
 import * as path from 'path';
 import { dirname } from 'path';
+import convert from '../src/convertToAbsolutePath.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -12,14 +12,14 @@ let simplePath;
 let absolutePath;
 
 beforeAll(() => {
-    simplePath = '__fixtures__/file1.json';
-    absolutePath = getFixturePath('file1.json');
-})
+  simplePath = '__fixtures__/file1.json';
+  absolutePath = getFixturePath('file1.json');
+});
 
 test('test with absolute path', () => {
-    expect(convert(absolutePath)).toEqual(absolutePath);
-})
+  expect(convert(absolutePath)).toEqual(absolutePath);
+});
 
 test('test with simple path', () => {
-    expect(convert(simplePath)).toEqual(absolutePath);
-})
+  expect(convert(simplePath)).toEqual(absolutePath);
+});
