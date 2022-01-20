@@ -30,3 +30,10 @@ jobs:
     - run: npm run build --if-present
     - run: npx jest
     - run: make lint
+    - name: Test & publish code coverage
+        uses: paambaati/codeclimate-action@v2.7.4
+        env:
+          CC_TEST_REPORTER_ID: 489737b42ddf8fe03e7f1a27fcde25c6b737e97a519eb324039d2934cc60aef4
+        with:
+          coverageCommand: make test-coverage
+          debug: true
