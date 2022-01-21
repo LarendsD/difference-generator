@@ -5,3 +5,4 @@
 [![Build Status](https://app.travis-ci.com/LarendsD/backend-project-lvl2.svg?branch=main)](https://app.travis-ci.com/LarendsD/backend-project-lvl2)
 
 <a href="https://asciinema.org/a/462554" target="_blank"><img src="https://asciinema.org/a/462554.svg" /></a>d
+<a href="https://asciinema.org/a/463305" target="_blank"><img src="https://asciinema.org/a/463305.svg" /></a>

@@ -1,13 +1,17 @@
 import genDiff from '../src/filediff.js';
 
-let pathToFile1;
-let pathToFile2;
-let resultCompareJSON;
+let pathToJson1;
+let pathToJson2;
+let pathToYaml1;
+let pathToYaml2;
+let resultCompare;
 
 beforeAll(() => {
-  pathToFile1 = '__fixtures__/file1.json';
-  pathToFile2 = '__fixtures__/file2.json';
-  resultCompareJSON = `{
+  pathToJson1 = '__fixtures__/file1.json';
+  pathToJson2 = '__fixtures__/file2.json';
+  pathToYaml1 = '__fixtures__/file1.yml';
+  pathToYaml2 = '__fixtures__/file2.yml';
+  resultCompare = `{
   - follow: false
     host: hexlet.io
   - proxy: 123.234.53.22
@@ -18,5 +22,9 @@ beforeAll(() => {
 });
 
 test('JSON compare', () => {
-  expect(genDiff(pathToFile1, pathToFile2)).toEqual(resultCompareJSON);
+  expect(genDiff(pathToJson1, pathToJson2)).toEqual(resultCompare);
+});
+
+test('yaml compare', () => {
+  expect(genDiff(pathToYaml1, pathToYaml2)).toEqual(resultCompare);
 });
