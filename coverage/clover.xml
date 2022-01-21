@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1642765829361" clover="3.2.0">
-  <project timestamp="1642765829361" name="All files">
+<coverage generated="1642766749665" clover="3.2.0">
+  <project timestamp="1642766749665" name="All files">
     <metrics statements="21" coveredstatements="21" conditionals="10" coveredconditionals="10" methods="2" coveredmethods="2" elements="33" coveredelements="33" complexity="0" loc="21" ncloc="21" packages="1" files="2" classes="2"/>
     <file name="convertToAbsolutePath.js" path="/home/timyr/Рабочий стол/backend-project-lvl2/src/convertToAbsolutePath.js">
       <metrics statements="5" coveredstatements="5" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
