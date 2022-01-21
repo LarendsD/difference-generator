@@ -16,10 +16,10 @@ beforeAll(() => {
   absolutePath = getFixturePath('file1.json');
 });
 
-test('test with absolute path', () => {
+test('testWithAbsolute path', () => {
   expect(convert(absolutePath)).toEqual(absolutePath);
 });
 
-test('test with simple path', () => {
+test('testWithSimple path', () => {
   expect(convert(simplePath)).toEqual(absolutePath);
 });
