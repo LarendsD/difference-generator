@@ -1,4 +1,4 @@
-import readFileSync from 'fs';
+import { readFileSync } from 'fs';
 import genDiff from '../src/filediff.js';
 import parser from '../src/fileParser.js';
 import convert from '../src/convertToAbsolutePath.js';
