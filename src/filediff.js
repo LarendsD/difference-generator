@@ -1,30 +1,34 @@
 /* eslint-disable no-restricted-syntax */
 import _ from 'lodash';
-import parser from './fileParser.js';
 
-const onlyInFile1 = '-';
-const onlyInFile2 = '+';
+const onlyInFile1 = '/!';
+const onlyInFile2 = '/+';
+const inTwoFiles = '/ ';
 
 function genDiff(filepath1, filepath2) {
-  const sortedFile1 = _.sortBy(Object.entries(parser(filepath1)));
-  const sortedFile2 = _.sortBy(Object.entries(parser(filepath2)));
-  let result = '{\n';
+  const sortedFile1 = Object.entries(filepath1);
+  const sortedFile2 = Object.entries(filepath2);
+  const result = {};
   for (const [key1, value1] of sortedFile1) {
     for (const [key2, value2] of sortedFile2) {
+      if (_.isObject(value1) && _.isObject(value2)) {
+        if (key1 === key2) {
+          result[key1 + inTwoFiles] = genDiff(value1, value2);
+        }
+      }
       if (key1 === key2 && value1 === value2) {
-        result += (`    ${key1}: ${value1}\n`);
+        result[key1 + inTwoFiles] = value1;
       }
     }
-    if (!result.includes(`    ${key1}: ${value1}\n`)) {
-      result += (`  ${onlyInFile1} ${key1}: ${value1}\n`);
+    if (result[key1 + inTwoFiles] === undefined) {
+      result[key1 + onlyInFile1] = value1;
     }
   }
   for (const [key2, value2] of sortedFile2) {
-    if (!result.includes(`    ${key2}: ${value2}\n`)) {
-      result += (`  ${onlyInFile2} ${key2}: ${value2}\n`);
+    if (result[key2 + inTwoFiles] === undefined) {
+      result[key2 + onlyInFile2] = value2;
     }
   }
-  result += '}';
   return result;
 }
 
