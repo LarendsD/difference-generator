@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 const space = '  ';
 
-function formatter(values, depth = 1) {
+function stylish(values, depth = 1) {
   const sortedValues = _.sortBy(Object.entries(values));
   let formattedValues = '{\n';
   for (const [key, value] of sortedValues) {
@@ -13,12 +13,12 @@ function formatter(values, depth = 1) {
         keys[1] = '-';
       }
       if (_.isObject(value)) {
-        formattedValues += `${space.repeat(depth)}${keys[1]} ${keys[0]}: ${formatter(value, depth + 2)}`;
+        formattedValues += `${space.repeat(depth)}${keys[1]} ${keys[0]}: ${stylish(value, depth + 2)}`;
       } else {
         formattedValues += `${space.repeat(depth)}${keys[1]} ${keys[0]}: ${value}\n`;
       }
     } else if (_.isObject(value)) {
-      formattedValues += `${space.repeat(depth)}  ${keys[0]}: ${formatter(value, depth + 2)}`;
+      formattedValues += `${space.repeat(depth)}  ${keys[0]}: ${stylish(value, depth + 2)}`;
     } else {
       formattedValues += `${space.repeat(depth)}  ${keys[0]}: ${value}\n`;
     }
@@ -27,4 +27,4 @@ function formatter(values, depth = 1) {
   return formattedValues;
 }
 
-export default formatter;
+export default stylish;
