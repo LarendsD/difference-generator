@@ -2,9 +2,9 @@
 import _ from 'lodash';
 import chooseFormat from './formatters/index.js';
 
-const onlyInFile1 = '/!';
-const onlyInFile2 = '/+';
-const inTwoFiles = '/';
+const onlyInFile1 = '/!DELETED';
+const onlyInFile2 = '/+ADDED';
+const inTwoFiles = '/NOT CHANGED';
 let depth = 0;
 
 function genDiff(filepath1, filepath2, format = 'stylish') {

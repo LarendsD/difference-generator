@@ -14,14 +14,14 @@ function plain(values, property = '') {
   for (const [key, value] of sortedValues) {
     const [cleanKey, separator] = key.split('/');
     path = property;
-    if (separator === '!') {
-      if (_.has(values, `${cleanKey}/+`)) {
-        formattedValues += `Property '${property}${cleanKey}' was updated. From ${formatValue(values[key])} to ${formatValue(values[`${cleanKey}/+`])}\n`;
+    if (separator === '!DELETED') {
+      if (_.has(values, `${cleanKey}/+ADDED`)) {
+        formattedValues += `Property '${property}${cleanKey}' was updated. From ${formatValue(values[key])} to ${formatValue(values[`${cleanKey}/+ADDED`])}\n`;
       } else {
         formattedValues += `Property '${property}${cleanKey}' was removed\n`;
       }
-    } else if (separator === '+') {
-      if (!_.has(values, `${cleanKey}/!`)) {
+    } else if (separator === '+ADDED') {
+      if (!_.has(values, `${cleanKey}/!DELETED`)) {
         formattedValues += `Property '${property}${cleanKey}' was added with value: ${formatValue(values[key])}\n`;
       }
     } else if (_.isObject(value)) {
