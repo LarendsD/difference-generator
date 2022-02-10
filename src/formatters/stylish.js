@@ -11,7 +11,6 @@ const formatValue = (value, depth) => {
 };
 
 function stylish(diffValues) {
-  console.log(diffValues);
   const iter = (diffValuesPrev, depth) => {
     const formattedResult = diffValuesPrev.flatMap((values) => {
       const { key, type, value } = values;

@@ -8,6 +8,7 @@ const updated = 'UPDATED';
 const notChanged = 'NOT CHANGED';
 
 const genDiff = (file1, file2, depth = 0, format = 'stylish') => {
+  console.log(file1, file2);
   const allKeys = [..._.keys(file1), ..._.keys(file2)];
   const uniteKeys = _.sortBy(_.uniq(allKeys));
   const result = uniteKeys.map((key) => {
