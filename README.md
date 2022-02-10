@@ -10,7 +10,7 @@ import genDiff from '@hexlet/code';
 1. Сравнение плоских json или yaml файлов:
 
 <a href="https://asciinema.org/a/462554" target="_blank"><img src="https://asciinema.org/a/462554.svg" /></a>
-<a href="https://asciinema.org/a/463305" target="_blank"><img src="https://asciinema.org/a/463305.svg" /></a>
+<a href="https://asciinema.org/a/463305" target="_blank"><img src="https://asciinema.org/a/463305.svg" /></a>в
 2. Сравнение вложенных json или yaml файлов:
 
 <a href="https://asciinema.org/a/465602" target="_blank"><img src="https://asciinema.org/a/465602.svg" /></a>
