@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import { Command } from 'commander';
 import genDiff from '../src/filediff.js';
 import convert from '../src/convertToAbsolutePath.js';
@@ -21,3 +19,5 @@ gendiff
   });
 
 gendiff.parse(process.argv);
+
+export default gendiff;
