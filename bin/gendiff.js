@@ -17,7 +17,7 @@ gendiff
   .action((filepath1, filepath2, type) => {
     const formattedFile1 = parser(convert(filepath1));
     const formattedFile2 = parser(convert(filepath2));
-    console.log(genDiff(formattedFile1, formattedFile2, type.format));
+    console.log(genDiff(formattedFile1, formattedFile2, 0, type.format));
   });
 
 gendiff.parse(process.argv);

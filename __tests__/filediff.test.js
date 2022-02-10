@@ -18,7 +18,7 @@ beforeAll(() => {
   pathToYaml2 = parser(convert('__fixtures__/file2.yml'));
   resultCompare = readFileSync('__fixtures__/result', 'utf8');
   resultComparePlain = readFileSync('__fixtures__/resultPlain', 'utf8');
-  resultCompareJSON = readFileSync('__fixtures__/resultJSON.json', 'utf8');
+  resultCompareJSON = readFileSync('__fixtures__/resultJSON', 'utf8');
 });
 
 test('JSON compare', () => {
@@ -26,11 +26,11 @@ test('JSON compare', () => {
 });
 
 test('JSON compare plain', () => {
-  expect(genDiff(pathToJson1, pathToJson2, 'plain')).toEqual(resultComparePlain);
+  expect(genDiff(pathToJson1, pathToJson2, 0, 'plain')).toEqual(resultComparePlain);
 });
 
 test('JSON compare json', () => {
-  expect(genDiff(pathToJson1, pathToJson2, 'json')).toEqual(resultCompareJSON);
+  expect(genDiff(pathToJson1, pathToJson2, 0, 'json')).toEqual(resultCompareJSON);
 });
 
 test('yaml compare', () => {
@@ -38,9 +38,9 @@ test('yaml compare', () => {
 });
 
 test('yaml compare plain', () => {
-  expect(genDiff(pathToYaml1, pathToYaml2, 'plain')).toEqual(resultComparePlain);
+  expect(genDiff(pathToYaml1, pathToYaml2, 0, 'plain')).toEqual(resultComparePlain);
 });
 
 test('yaml compare JSON', () => {
-  expect(genDiff(pathToYaml1, pathToYaml2, 'json')).toEqual(resultCompareJSON);
+  expect(genDiff(pathToYaml1, pathToYaml2, 0, 'json')).toEqual(resultCompareJSON);
 });

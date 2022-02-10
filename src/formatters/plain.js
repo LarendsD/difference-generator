@@ -1,36 +1,35 @@
-/* eslint-disable no-lonely-if */
-/* eslint-disable no-restricted-syntax */
 import _ from 'lodash';
 
-let path = '';
-
-const isString = (value) => ((typeof value === 'string') ? `'${value}'` : value);
-
-const formatValue = (value) => ((_.isObject(value)) ? '[complex value]' : isString(value));
-
-function plain(values, property = '') {
-  const sortedValues = _.sortBy(Object.entries(values));
-  let formattedValues = '';
-  for (const [key, value] of sortedValues) {
-    const [cleanKey, separator] = key.split('/');
-    path = property;
-    if (separator === '!DELETED') {
-      if (_.has(values, `${cleanKey}/+ADDED`)) {
-        formattedValues += `Property '${property}${cleanKey}' was updated. From ${formatValue(values[key])} to ${formatValue(values[`${cleanKey}/+ADDED`])}\n`;
-      } else {
-        formattedValues += `Property '${property}${cleanKey}' was removed\n`;
-      }
-    } else if (separator === '+ADDED') {
-      if (!_.has(values, `${cleanKey}/!DELETED`)) {
-        formattedValues += `Property '${property}${cleanKey}' was added with value: ${formatValue(values[key])}\n`;
-      }
-    } else if (_.isObject(value)) {
-      path += `${cleanKey}.`;
-      formattedValues += plain(value, path);
+const plain = (diffValues) => {
+  const formatValue = (item) => {
+    if (_.isObject(item) && item !== undefined) {
+      return '[complex value]';
     }
-  }
-  path = '';
-  return formattedValues;
-}
+    if (typeof item === 'string') {
+      return `'${item}'`;
+    }
+    return item;
+  };
+  const iter = (diffValuesPrev, depth) => {
+    const result = diffValuesPrev.flatMap((values) => {
+      const { key, type, value } = values;
+      const fullPath = depth ? [...depth, key].join('.') : key;
+      if (type === 'NOT CHANGED') {
+        if (value === undefined) {
+          return iter(values.children, [...depth, key]);
+        }
+      } if (type === 'ADDED') {
+        return `Property '${fullPath}' was added with value: ${formatValue(value)}`;
+      } if (type === 'UPDATED') {
+        return `Property '${fullPath}' was updated. From ${formatValue(values.previousValue)} to ${formatValue(values.newValue)}`;
+      } if (type === 'DELETED') {
+        return `Property '${fullPath}' was removed`;
+      }
+      return [];
+    });
+    return result.join('\n');
+  };
+  return iter(diffValues, []);
+};
 
 export default plain;

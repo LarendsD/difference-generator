@@ -1,28 +1,34 @@
-/* eslint-disable no-restricted-syntax */
 import _ from 'lodash';
 
-const space = '  ';
+const space = ' ';
 
-function stylish(values, depth = 1) {
-  const sortedValues = _.sortBy(Object.entries(values));
-  let formattedValues = '{\n';
-  for (const [key, value] of sortedValues) {
-    const keys = key.split('/');
-    if (keys[1] === '!DELETED') {
-      keys[1] = '-';
-    } else if (keys[1] === '+ADDED') {
-      keys[1] = '+';
-    } else {
-      keys[1] = ' ';
-    }
-    if (_.isObject(value)) {
-      formattedValues += `${space.repeat(depth)}${keys[1]} ${keys[0]}: ${stylish(value, depth + 2)}`;
-    } else {
-      formattedValues += `${space.repeat(depth)}${keys[1]} ${keys[0]}: ${value}\n`;
-    }
+const formatValue = (value, depth) => {
+  if (_.isObject(value)) {
+    const result = Object.keys(value).map((key) => `${space.repeat(depth + 6)}  ${key}: ${formatValue(value[key], depth + 4)}`);
+    return ['{', ...result, `${space.repeat(depth + 4)}}`].join('\n');
   }
-  formattedValues += `${space.repeat(depth - 1)}}\n`;
-  return formattedValues;
+  return value;
+};
+
+function stylish(diffValues) {
+  const iter = (diffValuesPrev, depth) => {
+    const formattedResult = diffValuesPrev.map((values) => {
+      const { key, type, value } = values;
+      if (type === 'NOT CHANGED') {
+        if (value === undefined) {
+          return `${space.repeat(depth + 3)} ${key}: ${iter(values.children, depth + 4)}`;
+        }
+        return `${space.repeat(depth + 2)}  ${key}: ${value}`;
+      } if (type === 'ADDED') {
+        return `${space.repeat(depth + 2)}+ ${key}: ${formatValue(value, depth)}`;
+      } if (type === 'DELETED') {
+        return `${space.repeat(depth + 2)}- ${key}: ${formatValue(value, depth)}`;
+      }
+      return `${space.repeat(depth + 2)}- ${key}: ${formatValue(values.previousValue, depth)}\n${space.repeat(depth + 2)}+ ${key}: ${formatValue(values.newValue, depth)}`;
+    });
+    return ['{', ...formattedResult, `${space.repeat(depth)}}`].join('\n');
+  };
+  return iter(diffValues, 0);
 }
 
 export default stylish;
