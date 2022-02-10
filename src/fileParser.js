@@ -3,6 +3,7 @@ import * as jsyaml from 'js-yaml';
 import { readFileSync } from 'fs';
 
 const parser = (filepath) => {
+  console.log(filepath);
   if (path.extname(filepath) === '.json') {
     return JSON.parse(readFileSync(filepath, 'utf8'));
   } if (path.extname(filepath) === '.yaml' || path.extname(filepath) === '.yml') {
