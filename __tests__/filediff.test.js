@@ -3,23 +3,13 @@ import genDiff from '../src/filediff.js';
 import parser from '../src/fileParser.js';
 import convert from '../src/convertToAbsolutePath.js';
 
-let pathToJson1;
-let pathToJson2;
-let pathToYaml1;
-let pathToYaml2;
-let resultCompare;
-let resultComparePlain;
-let resultCompareJSON;
-
-beforeAll(() => {
-  pathToJson1 = parser(convert('__fixtures__/file1.json'));
-  pathToJson2 = parser(convert('__fixtures__/file2.json'));
-  pathToYaml1 = parser(convert('__fixtures__/file1.yml'));
-  pathToYaml2 = parser(convert('__fixtures__/file2.yml'));
-  resultCompare = readFileSync('__fixtures__/result', 'utf8');
-  resultComparePlain = readFileSync('__fixtures__/resultPlain', 'utf8');
-  resultCompareJSON = readFileSync('__fixtures__/resultJSON', 'utf8');
-});
+const pathToJson1 = parser(convert('__fixtures__/file1.json'));
+const pathToJson2 = parser(convert('__fixtures__/file2.json'));
+const pathToYaml1 = parser(convert('__fixtures__/file1.yml'));
+const pathToYaml2 = parser(convert('__fixtures__/file2.yml'));
+const resultCompare = readFileSync('__fixtures__/result', 'utf8');
+const resultComparePlain = readFileSync('__fixtures__/resultPlain', 'utf8');
+const resultCompareJSON = readFileSync('__fixtures__/resultJSON', 'utf8');
 
 test('JSON compare', () => {
   expect(genDiff(pathToJson1, pathToJson2)).toEqual(resultCompare);
