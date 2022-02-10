@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import chooseFormat from './index.js';
+import chooseFormat from './formatters/index.js';
 
 const deleted = 'DELETED';
 const added = 'ADDED';
