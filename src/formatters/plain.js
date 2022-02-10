@@ -11,22 +11,19 @@ const plain = (diffValues) => {
     return item;
   };
   const iter = (diffValuesPrev, depth) => {
-    const result = diffValuesPrev.flatMap((values) => {
-      const { key, type, value } = values;
-      const fullPath = depth ? [...depth, key].join('.') : key;
-      if (type === 'NOT CHANGED') {
-        if (value === undefined) {
-          return iter(values.children, [...depth, key]);
+    const result = diffValuesPrev.filter(({ type }) => type !== 'NOT CHANGED')
+      .flatMap((values) => {
+        const { key, type, value } = values;
+        const fullPath = depth ? [...depth, key].join('.') : key;
+        if (type === 'ADDED') {
+          return `Property '${fullPath}' was added with value: ${formatValue(value)}`;
+        } if (type === 'UPDATED') {
+          return `Property '${fullPath}' was updated. From ${formatValue(values.previousValue)} to ${formatValue(values.newValue)}`;
+        } if (type === 'DELETED') {
+          return `Property '${fullPath}' was removed`;
         }
-      } if (type === 'ADDED') {
-        return `Property '${fullPath}' was added with value: ${formatValue(value)}`;
-      } if (type === 'UPDATED') {
-        return `Property '${fullPath}' was updated. From ${formatValue(values.previousValue)} to ${formatValue(values.newValue)}`;
-      } if (type === 'DELETED') {
-        return `Property '${fullPath}' was removed`;
-      }
-      return [];
-    });
+        return iter(values.children, [...depth, key]);
+      });
     return result.join('\n');
   };
   return iter(diffValues, []);
