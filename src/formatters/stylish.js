@@ -13,8 +13,8 @@ const formatValue = (value, depth) => {
 function stylish(diffValues) {
   const iter = (diffValuesPrev, depth) => {
     const formattedResult = diffValuesPrev.flatMap((values) => {
+      console.log(values);
       const { key, type, value } = values;
-      console.log(key, value);
       if (type === 'PARENT') {
         return `${space.repeat(depth + 3)} ${key}: ${iter(values.children, depth + 4)}`;
       } if (type === 'ADDED') {
