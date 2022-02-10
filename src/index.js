@@ -1,6 +1,6 @@
-import json from './json.js';
-import plain from './plain.js';
-import stylish from './stylish.js';
+import json from './formatters/json.js';
+import plain from './formatters/plain.js';
+import stylish from './formatters/stylish.js';
 
 const chooseFormat = (diff, format) => {
   if (format === 'plain') {
