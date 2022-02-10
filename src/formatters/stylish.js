@@ -11,9 +11,9 @@ const formatValue = (value, depth) => {
 };
 
 function stylish(diffValues) {
+  console.log(diffValues);
   const iter = (diffValuesPrev, depth) => {
     const formattedResult = diffValuesPrev.flatMap((values) => {
-      console.log(values);
       const { key, type, value } = values;
       if (type === 'PARENT') {
         return `${space.repeat(depth + 3)} ${key}: ${iter(values.children, depth + 4)}`;
