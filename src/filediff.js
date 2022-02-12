@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import chooseFormat from './formatters/index.js';
 
 const deleted = 'DELETED';
 const added = 'ADDED';
@@ -7,7 +6,7 @@ const parent = 'PARENT';
 const updated = 'UPDATED';
 const notChanged = 'NOT CHANGED';
 
-const genDiff = (file1, file2, depth = 0, format = 'stylish') => {
+const genDiff = (file1, file2) => {
   const allKeys = [..._.keys(file1), ..._.keys(file2)];
   const uniteKeys = _.sortBy(_.uniq(allKeys));
   const result = uniteKeys.map((key) => {
@@ -15,7 +14,7 @@ const genDiff = (file1, file2, depth = 0, format = 'stylish') => {
       return {
         key,
         type: parent,
-        children: genDiff(file1[key], file2[key], depth + 1),
+        children: genDiff(file1[key], file2[key]),
       };
     } if (_.has(file1, key) && !_.has(file2, key)) {
       return {
@@ -44,9 +43,6 @@ const genDiff = (file1, file2, depth = 0, format = 'stylish') => {
       value: file1[key],
     };
   });
-  if (depth === 0) {
-    return chooseFormat(result, format);
-  }
   return result;
 };
 

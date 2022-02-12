@@ -1,11 +1,5 @@
-import { cwd } from 'process';
+import path from 'path';
 
-const convert = (paths) => {
-  const currentDirectory = cwd();
-  if (paths.startsWith(currentDirectory)) {
-    return paths;
-  }
-  return `${currentDirectory}/${paths}`;
-};
+const convert = (filepath) => path.resolve(process.cwd(), filepath);
 
 export default convert;

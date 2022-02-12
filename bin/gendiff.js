@@ -11,8 +11,8 @@ gendiff
   .option('-V, --version', 'output the version number')
   .helpOption('-h, --help', 'output usage information')
   .option('-f, --format <type>', 'output format', 'stylish')
-  .action((filepath1, filepath2, type) => {
-    console.log(genDifference(filepath1, filepath2, type.format));
+  .action((filepath1, filepath2, option) => {
+    console.log(genDifference(filepath1, filepath2, option.format));
   });
 
 gendiff.parse(process.argv);
