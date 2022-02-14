@@ -1,5 +1,5 @@
 import { readFileSync } from 'fs';
-import genDifference from '../src/gendiff.js';
+import genDifference from '../src/index.js';
 
 const pathToJson1 = '__fixtures__/file1.json';
 const pathToJson2 = '__fixtures__/file2.json';
