@@ -6,7 +6,7 @@
     "gendiff": "bin/gendiff.js"
   },
   "type": "module",
-  "main": "src/gendiff.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "jest --colors"
   },
