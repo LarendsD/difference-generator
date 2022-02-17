@@ -1,12 +1,12 @@
 import * as jsyaml from 'js-yaml';
 
-const parser = (fileData, format) => {
+const parser = (data, format) => {
   switch (format) {
     case 'json':
-      return JSON.parse(fileData);
+      return JSON.parse(data);
     case 'yaml':
     case 'yml':
-      return jsyaml.load(fileData);
+      return jsyaml.load(data);
     default:
       throw new Error(`extension ${format} is not supported`);
   }
