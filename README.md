@@ -22,6 +22,14 @@ npm ci
 npm link
 ```
 ## :blue_book: Использование библиотеки ##
+<h3 align="center"> 
+  Дополнительная информация
+</h3>
+
+```bash
+gendiff -h
+```
+
 <h3 align="center">
   Стандартный формат
 </h3>
