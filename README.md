@@ -1,5 +1,5 @@
 <h1 align="center">
-  Difference calculator
+  Difference generator
 </h1>
 
 [![Actions Status](https://github.com/LarendsD/backend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/LarendsD/backend-project-lvl2/actions)
